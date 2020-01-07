@@ -2,7 +2,7 @@
 #define _LOGGER_H
 
 /**
- * @brief
+ * @brief Log value type.
  */
 typedef enum {
 	LOGGER_LOG_SYSTEM,
@@ -16,17 +16,17 @@ typedef enum {
 } logger_log_t;
 
 /**
- * @brief
+ * @brief Log size.
  */
 #define LOGGER_LOGSIZE 8
 
 /**
- * @brief
+ * @brief Buffer size.
  */
 #define LOGGER_BUFSIZE LOGGER_LOGSIZE*2
 
 /**
- * @brief
+ * @brief Memory structure.
  */
 typedef struct {
 	uint8_t r_pos;
@@ -35,19 +35,26 @@ typedef struct {
 } logger_memory_t;
 
 /**
- * @brief
+ * @brief Initialize memory.
  * @param mem
  * @return void
  */
 void logger_init(logger_memory_t *mem);
 
 /**
- * @brief
+ * @brief Write a value to memory.
  * @param mem
  * @param type
  * @param value
  * @return void
  */
 void logger_put(logger_memory_t *mem, logger_log_t type, uint16_t value);
+
+/**
+ * @brief Read a value from memory.
+ * @param mem
+ * @return void
+ */
+uint16_t logger_get(logger_memory_t *mem);
 
 #endif // _LOGGER_H

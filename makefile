@@ -16,7 +16,7 @@ LOGGER_O = logger_tests.o logger.o
 LOGGER_BIN = logger_tests
 
 logger_build: $(LOGGER_O)
-	$(CXX) $(CXXFLAGS) -mmcu=$(DEVICE) -DF_CPU=$(FCPU) -o bin/$(LOGGER_BIN) $(LOGGER_O)
+	$(CXX) $(CXXFLAGS) -mmcu=$(DEVICE) -DF_CPU=$(FCPU) -o bin/$(LOGGER_BIN) $(LOGGER_O) $(LIBS)
 
 logger_tests.o: tests/logger_tests.c
 	$(CXX) $(CXXFLAGS) -mmcu=$(DEVICE) -DF_CPU=$(FCPU) -c tests/logger_tests.c $(LIBS)
