@@ -2,7 +2,7 @@
 #define _LOGGER_H
 
 /**
- * @brief Log value type.
+ * @brief Log value types.
  */
 typedef enum {
 	LOGGER_LOG_SYSTEM,
@@ -12,49 +12,30 @@ typedef enum {
 	LOGGER_LOG_WHEEL2,
 	LOGGER_LOG_MOTOR_TEMP,
 	LOGGER_LOG_FLUID_FLOW,
-	LOGGER_LOG_FLUID_TEMP
+	LOGGER_LOG_FLUID_TEMP,
+	LOGGER_LOG_SIZE
 } logger_log_t;
 
 /**
- * @brief Log size.
+ * @brief Initialize the logger.
+ * @param void
+ * @return Pointer to the static (readable) buffer.
  */
-#define LOGGER_LOGSIZE 8
+void *logger_init(void);
 
 /**
- * @brief Buffer size.
- */
-#define LOGGER_BUFSIZE LOGGER_LOGSIZE*2
-
-/**
- * @brief Memory structure.
- */
-typedef struct {
-	uint8_t r_pos;
-	uint8_t w_pos;
-	uint16_t mem[LOGGER_BUFSIZE];
-} logger_memory_t;
-
-/**
- * @brief Initialize memory.
- * @param mem
- * @return void
- */
-void logger_init(logger_memory_t *mem);
-
-/**
- * @brief Write a value to memory.
- * @param mem
+ * @brief Write a value to the log.
  * @param type
  * @param value
  * @return void
  */
-void logger_put(logger_memory_t *mem, logger_log_t type, uint16_t value);
+void logger_log(logger_log_t type, uint16_t value);
 
 /**
- * @brief Read a value from memory.
- * @param mem
- * @return void
+ * @brief Rotate the log.
+ * @param void
+ * @return Pointer to the static (readable) buffer.
  */
-uint16_t logger_get(logger_memory_t *mem);
+void *logger_rotate(void);
 
 #endif // _LOGGER_H
