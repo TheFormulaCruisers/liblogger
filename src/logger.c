@@ -18,14 +18,12 @@ static volatile buffer_t buffer;
 void *logger_init(void) {
 
 	uint8_t i;
-
 	for (i = 0; i < LOGGER_LOG_SIZE; i++) {
 		buffer.buffer1[i] = UINT16_MAX;
 		buffer.buffer2[i] = UINT16_MAX;
 	}
 	
 	buffer.writable = (void *)buffer.buffer1;
-
 	return (void *)buffer.buffer2;
 }
 
