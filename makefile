@@ -12,14 +12,14 @@ FCPU		= 16000000
 # Make
 #===========
 
-LOGGER_O = logger_tests.o logger.o
-LOGGER_BIN = logger_tests
+LOGGER_O = logger_test.o logger.o
+LOGGER_BIN = logger_test
 
 logger_build: $(LOGGER_O)
 	$(CXX) $(CXXFLAGS) -mmcu=$(DEVICE) -DF_CPU=$(FCPU) -o bin/$(LOGGER_BIN) $(LOGGER_O) $(LIBS)
 
-logger_tests.o: tests/logger_tests.c
-	$(CXX) $(CXXFLAGS) -mmcu=$(DEVICE) -DF_CPU=$(FCPU) -c tests/logger_tests.c $(LIBS)
+logger_test.o: tests/logger_test.c
+	$(CXX) $(CXXFLAGS) -mmcu=$(DEVICE) -DF_CPU=$(FCPU) -c tests/logger_test.c $(LIBS)
 
 logger.o: src/logger.c
 	$(CXX) $(CXXFLAGS) -mmcu=$(DEVICE) -DF_CPU=$(FCPU) -c src/logger.c $(LIBS)
