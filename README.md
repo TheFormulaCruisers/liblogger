@@ -1,12 +1,12 @@
 # liblogger
 
-This library provides a mechanism for easy data logging. The structure of the log is defined before hand. It accepts 16-bit values that are stored in a predefined, fixed location. The accepted entries are defined in the header file. Changing, removing or adding entries in the log requires editing it. The interface is designed to be used with [libspi](https://github.com/TheFormulaCruisers/libspi).
+This library provides a mechanism for logging data. The structure of the log is defined before hand. It accepts 16-bit values that are stored in a predefined, fixed location. The accepted entries are defined in the header file. Changing, removing or adding entries in the log requires editing it. The interface is designed to be used with [libspi](https://github.com/TheFormulaCruisers/libspi).
 
 Once initialized it may be called from anywhere in the program, logging data to a single globally available buffer. Initializing two individual logs is not supported.
 
 ## Operation
 
-Liblogger reserves two equally sized global buffers used to store log data. Their size is a multiple of two bytes, since it stores two-byte values, and is automatically calculated during compilation. To only one of the two buffers is written at a time, allowing the other to be read without getting corrupted by a write operation. The two buffers may be swapped (rotated), in order to readout newly acquired data.
+Liblogger reserves two equally sized global buffers used to store log data. Their size is a multiple of two bytes, since it stores two-byte values, and is automatically calculated during compilation. To only one of the two buffers is written at a time, allowing the other to be read without getting corrupted by a write operation. The two buffers may be swapped (rotated), in order to readout newly acquired data. A pointer to the static log is returned after initializing or rotating the log.
 
 ## Usage
 
