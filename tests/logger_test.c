@@ -5,6 +5,7 @@
 int main(void) {
 
 	uint16_t *log_buffer;
+	sei();
 
 	log_buffer = logger_init();
 

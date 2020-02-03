@@ -1,4 +1,4 @@
-#include <stdint.h>
+#include <avr/io.h>
 #include <logger.h>
 
 // ---------------------------------------------------------------------- Types
@@ -16,8 +16,8 @@ static volatile buffer_t buffer;
 // --------------------------------------------------------- External Functions
 
 void *logger_init(void) {
-
 	uint8_t i;
+
 	for (i = 0; i < LOGGER_LOG_SIZE; i++) {
 		buffer.buffer1[i] = UINT16_MAX;
 		buffer.buffer2[i] = UINT16_MAX;
@@ -28,8 +28,11 @@ void *logger_init(void) {
 }
 
 void logger_log(logger_log_t type, uint16_t value) {
+	const uint8_t sreg_msk = SREG & 0x80;
 
+	SREG ^= sreg_msk;
 	*(buffer.writable+type) = value;
+	SREG |= sreg_msk;
 }
 
 void *logger_rotate(void) {
