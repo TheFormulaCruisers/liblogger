@@ -13,8 +13,16 @@ typedef enum {
 	LOGGER_LOG_MOTOR_TEMP,
 	LOGGER_LOG_FLUID_FLOW,
 	LOGGER_LOG_FLUID_TEMP,
-	LOGGER_LOG_SIZE
+	LOGGER_LOG_COUNT
 } logger_log_t;
+
+/**
+ * @brief Calculate the size of the log
+ *
+ * Since each log entry is 2 bytes in size, the log size is calculated by
+ * multiplying the entry count by 2.
+ */
+#define LOGGER_LOG_SIZE LOGGER_LOG_COUNT*2
 
 /**
  * @brief Initialize the logger.
